@@ -4,6 +4,7 @@
 package n4l.games.arena;
 
 import java.awt.HeadlessException;
+import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 
@@ -44,6 +45,11 @@ public class Skeleton extends JFrame {
 		// Jis sukuria naują Skeleton instance (inicijuotą objektą):
 		new Skeleton();
 		// Kas vyksta toliau -- žr. konstruktorių Skeleton().
+		
+		
+		@SuppressWarnings("unused")
+		Logger globalLogger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+		
 	}
 
 }
