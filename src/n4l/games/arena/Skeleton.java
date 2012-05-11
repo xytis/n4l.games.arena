@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 
 /**
  * @author xytis
- *
+ * 
  */
 public class Skeleton extends JFrame {
 
@@ -26,14 +26,14 @@ public class Skeleton extends JFrame {
 		// Vienas iš jų į JFrame įdeda kitą JFrame. Tai kaip langas lange.
 		add(new Board());
 		// Čia lango parametrai:
-        setTitle("Skeleton");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(300, 280);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        setResizable(false);
-        // Viskas. Kiti metodai, kaip lango perpaišymui ar pelės jautimui 
-        // lieka neperrašyti.
+		setTitle("Skeleton");
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setSize(300, 280);
+		setLocationRelativeTo(null);
+		setVisible(true);
+		setResizable(false);
+		// Viskas. Kiti metodai, kaip lango perpaišymui ar pelės jautimui
+		// lieka neperrašyti.
 	}
 
 	/**
