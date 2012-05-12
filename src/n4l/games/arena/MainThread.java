@@ -8,14 +8,14 @@ package n4l.games.arena;
  * 
  * @category Main application
  * 
- * This class encapsulates the main thread, which controls the refresh rate,
- * the update sequence, and stop sequence.
- *
+ *           This class encapsulates the main thread, which controls the refresh
+ *           rate, the update sequence, and stop sequence.
+ * 
  */
 public class MainThread extends Thread {
 
 	private boolean running;
-	
+
 	/**
 	 * 
 	 */
@@ -24,15 +24,11 @@ public class MainThread extends Thread {
 	}
 
 	@Override
-	public void run()
-	{
-		while (running)
-		{
-			try
-			{
+	public void run() {
+		while (running) {
+			try {
 				Thread.sleep(1);
-			}
-			catch (InterruptedException e) {
+			} catch (InterruptedException e) {
 				// TODO: handle exception
 			}
 		}

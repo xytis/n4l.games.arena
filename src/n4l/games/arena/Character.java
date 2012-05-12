@@ -1,52 +1,96 @@
 package n4l.games.arena;
 
 public class Character {
-	//fields
-	private String name;
-	private int size;
-	private int health;
-	
+	// fields
+	protected String name;
+	protected int size;
+	protected int health;
+
 	// getters
 	public String getName() {
-		return name;
+		return this.name;
 	}
+
 	public int getSize() {
-		return size;
+		return this.size;
 	}
+
 	public int getHealth() {
-		return health;
+		return this.health;
 	}
-	
+
 	// setters
-	public void setName(String name) {
+	public Character setName(String name) {
 		this.name = name;
+		return this;
 	}
-	public void setSize (int size) {
+
+	public Character setSize(int size) {
 		this.size = size;
+		return this;
 	}
-	public void setHealth(int health) {
+
+	public Character setHealth(int health) {
+		this.health = health;
+		return this;
+	}
+
+	// constructors
+	/**
+	 * Empty constructor, creates character with template info.
+	 */
+	public Character() {
+		this.name = "unknown name";
+		this.size = 1;
+		this.health = 2;
+	}
+
+	/**
+	 * Constructor
+	 * 
+	 * @param name
+	 *            Descriptive character name
+	 * @param size
+	 *            Size factor
+	 * @param health
+	 *            Total health
+	 */
+	public Character(String name, int size, int health) {
+		this.name = name;
+		this.size = size;
 		this.health = health;
 	}
-	
-	//constructor
-	public Character() {
-		name = "unknown name";
-		size = 1;
-		health = 2;
-	}
-	
-	public Character(String N, int W, int H) {
-		name = N;
-		size = W;
-		health = H;
-	}
-	
+
+	/**
+	 * Verbose parameter reporting
+	 * 
+	 * @return String verbose status
+	 */
 	public String reportStatus() {
-		if (this.health>0)
-			return "My name is " + this.getName() +" My health is " + this.getHealth()+
-				" hp. and size is " + this.getSize() + ".\n";
-		else
-			return this.getName() +" is dead";
+		return "My name is " + this.getTitle() + " and I am "
+				+ this.getCondition() + '.';
 	}
-	
+
+	/**
+	 * How should I be called?
+	 * 
+	 * @return String name, to call me.
+	 */
+	public String getTitle() {
+		return this.getName();
+	}
+
+	/**
+	 * How do I feel?
+	 * 
+	 * @return String condition
+	 */
+	public String getCondition() {
+		if (health <= 0) {
+			return "dead";
+		} else {
+			return "standing " + getSize() + " feet tall";
+		}
+	}
+
 }
