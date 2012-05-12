@@ -4,6 +4,7 @@
 package n4l.games.arena;
 
 import java.awt.HeadlessException;
+import java.io.Console;
 
 import javax.swing.JFrame;
 
@@ -18,13 +19,14 @@ public class Skeleton extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	protected TextOutput console;
+	
 	/**
 	 * @throws HeadlessException
 	 */
 	public Skeleton() throws HeadlessException {
-		// Skeleton yra vaikas JFrame klasės. Jis turi daug veikiančių metodų.
-		// Vienas iš jų į JFrame įdeda kitą JFrame. Tai kaip langas lange.
-		add(new Board());
+		console = new TextOutput();
+		add(console);
 		// Čia lango parametrai:
         setTitle("Skeleton");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -35,6 +37,14 @@ public class Skeleton extends JFrame {
         // Viskas. Kiti metodai, kaip lango perpaišymui ar pelės jautimui 
         // lieka neperrašyti.
 	}
+	
+	/**
+	 * 
+	 */
+	public void print(String text)
+	{
+		console.print(text);
+	}
 
 	/**
 	 * @param args
@@ -42,8 +52,11 @@ public class Skeleton extends JFrame {
 	public static void main(String[] args) {
 		// Šis metodas priklauso klasei, ir yra kviečiamas kaip Skeleton.main();
 		// Jis sukuria naują Skeleton instance (inicijuotą objektą):
-		new Skeleton();
+		Skeleton window = new Skeleton();
 		// Kas vyksta toliau -- žr. konstruktorių Skeleton().
+		
+		// Toliau programa ->
+		window.print("Hello, my dear friend");
 	}
 
 }
