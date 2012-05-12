@@ -26,15 +26,14 @@ public class Skeleton extends JFrame {
 	public Skeleton() throws HeadlessException {
 		console = new TextOutput();
 		add(console);
-		// Čia lango parametrai:
+		// ia lango parametrai:
         setTitle("Skeleton");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(300, 280);
         setLocationRelativeTo(null);
         setVisible(true);
         setResizable(false);
-        // Viskas. Kiti metodai, kaip lango perpaišymui ar pelės jautimui 
-        // lieka neperrašyti.
+        
 	}
 	
 	/**
@@ -47,16 +46,31 @@ public class Skeleton extends JFrame {
 
 	
 	public static void main(String[] args) {
-		// Šis metodas priklauso klasei, ir yra kviečiamas kaip Skeleton.main();
-		// Jis sukuria naują Skeleton instance (inicijuotą objektą):
+		
 		Skeleton window = new Skeleton();
-		// Kas vyksta toliau -- žr. konstruktorių Skeleton().
+		// Kas vyksta toliau		
+		//create dude
+		Mage Dude = new Mage("Dude", 1, 2, "Archmage");
+				
+		//create Gaia
+		Mage Gaia = new Mage("Gaia", 20, 500, "Primal Deity");
+		
+		//keistas kurimo bbudas
+		Character tree = new Mage("tree", 5, 2, "MightyTree");
+		
+		
 		
 		@SuppressWarnings("unused")
 		Logger globalLogger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 		
-		// Toliau programa ->
-		window.print("Hello, my dear friend");
+		// Toliau programa
+		window.print(Dude.reportStatus() + tree.reportStatus() + Dude.bitchSlap()+ "\n" + Dude.fireball()+"\n");
+		
+		tree.setHealth(0);
+		window.print(tree.reportStatus());
+		
 	}
+	
+	
 
 }

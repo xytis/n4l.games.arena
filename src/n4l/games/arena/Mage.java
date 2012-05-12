@@ -21,28 +21,30 @@ public class Mage extends Character {
 		type = Type;
 	}
 
-	/*
-	public static void main(String[] args) {
-		//create dude
-		Mage Dude = new Mage("Dude", 60, 2, "Archmage");
-		
-		//create Gaia
-		Mage Gaia = new Mage();
-		Gaia.setName("Gaia");
-		Gaia.setHeight(20);
-		Gaia.setType("Primal Deity");
-		Gaia.setWeight(500);
-		
-		Dude.printStatus();
-		Gaia.printStatus();
-		
-	}
-	*/
 	
-	private void printStatus() {
-		System.out.println("My name is " + this.getName() + ". I am " + this.getType());
-		System.out.println("My height is " + this.getHeight()+ " m. "
-				+ "and weight is " + this.getWeight() + " kg \n");
-		
+	public String reportStatus()
+	{
+		if (this.getHealth()>0)
+			return super.reportStatus() + " I am " + this.getType() + ".\n";
+		else
+			return super.reportStatus();
 	}
+	
+	
+	
+	
+	//spelai
+	
+	public String fireball() {
+		return this.getName() + "casts Fireball";
+	}
+	
+	public String healingLight() {
+		return this.getName() + "casts Healing light";
+	}
+	
+	public String bitchSlap() {
+		return this.getName() + "casts BitchSlap";
+	}
+	
 }
