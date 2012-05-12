@@ -19,37 +19,42 @@ public class Skeleton extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @throws HeadlessException
-	 */
+	protected TextOutput console;
+	
+	
+	
 	public Skeleton() throws HeadlessException {
-		// Skeleton yra vaikas JFrame klasės. Jis turi daug veikiančių metodų.
-		// Vienas iš jų į JFrame įdeda kitą JFrame. Tai kaip langas lange.
-		add(new Board());
-		// Čia lango parametrai:
+		console = new TextOutput();
+		add(console);
+		
 		setTitle("Skeleton");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(300, 280);
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setResizable(false);
-		// Viskas. Kiti metodai, kaip lango perpaišymui ar pelės jautimui
-		// lieka neperrašyti.
+		
+	}
+	
+	
+	public void print(String text)
+	{
+		console.print(text);
 	}
 
-	/**
-	 * @param args
-	 */
+	
 	public static void main(String[] args) {
 		// Šis metodas priklauso klasei, ir yra kviečiamas kaip Skeleton.main();
 		// Jis sukuria naują Skeleton instance (inicijuotą objektą):
-		new Skeleton();
+		Skeleton window = new Skeleton();
 		// Kas vyksta toliau -- žr. konstruktorių Skeleton().
 		
 		
 		@SuppressWarnings("unused")
 		Logger globalLogger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 		
+		// Toliau programa ->
+		window.print("Hello, my dear friend");
 	}
 
 }
