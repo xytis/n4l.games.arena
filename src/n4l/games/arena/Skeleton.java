@@ -4,8 +4,6 @@
 package n4l.games.arena;
 
 import java.awt.HeadlessException;
-import java.io.Console;
-
 import javax.swing.JFrame;
 
 /**
