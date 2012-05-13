@@ -55,7 +55,7 @@ public class MainThread extends Thread {
 			
 			// render state to the screen
 			// draws the canvas on the panel
-			this.mainPanel.render(canvas);
+			this.mainPanel.render();
 			
 			// calculate how long did the cycle take
 			timeDiff = System.currentTimeMillis() - beginTime;
@@ -79,38 +79,6 @@ public class MainThread extends Thread {
 				framesSkipped++;
 			}
 			
-		}
-	}
-
-
-
-	@Override
-	public void run() {
-		Canvas canvas;
-		Log.d(TAG, "Starting game loop");
-
-		
-
-		sleepTime = 0;
-
-		while (running) {
-			canvas = null;
-			// try locking the canvas for exclusive pixel editing
-			// in the surface
-			try {
-				canvas = this.surfaceHolder.lockCanvas();
-				synchronized (surfaceHolder) {
-					beginTime = System.currentTimeMillis();
-					
-					
-				}
-			} finally {
-				// in case of an exception the surface is not left in
-				// an inconsistent state
-				if (canvas != null) {
-					surfaceHolder.unlockCanvasAndPost(canvas);
-				}
-			}	// end finally
 		}
 	}
 

@@ -23,9 +23,7 @@ public class Skeleton extends JFrame {
 	 * @throws HeadlessException
 	 */
 	public Skeleton() throws HeadlessException {
-		// Skeleton yra vaikas JFrame klasės. Jis turi daug veikiančių metodų.
-		// Vienas iš jų į JFrame įdeda kitą JFrame. Tai kaip langas lange.
-		add(new Board());
+		add(new MainPanel());
 		// Čia lango parametrai:
 		setTitle("Skeleton");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -33,8 +31,6 @@ public class Skeleton extends JFrame {
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setResizable(false);
-		// Viskas. Kiti metodai, kaip lango perpaišymui ar pelės jautimui
-		// lieka neperrašyti.
 	}
 
 	/**
