@@ -12,7 +12,7 @@ import java.awt.event.KeyEvent;
  * @author xytis
  *
  */
-class KeyInputHandler extends KeyAdapter {
+public class KeyInputHandler extends KeyAdapter {
 
 	/**
 	 * Notification from AWT that a key has been pressed.

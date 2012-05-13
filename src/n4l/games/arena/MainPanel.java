@@ -4,7 +4,7 @@
 package n4l.games.arena;
 
 import java.awt.Canvas;
-import java.awt.event.KeyEvent;
+import n4l.games.arena.utils.*;
 
 
 /**
@@ -31,5 +31,17 @@ public class MainPanel extends Canvas {
 	}
 	
 	
-
+	/**
+	 * 
+	 */
+	public void update() {
+		
+	}
+	
+	/**
+	 * 
+	 */
+	public void render() {
+		
+	}
 }
