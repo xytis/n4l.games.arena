@@ -23,7 +23,9 @@ public class Skeleton extends JFrame {
 	 * @throws HeadlessException
 	 */
 	public Skeleton() throws HeadlessException {
-		add(new MainPanel());
+		MainPanel panel = new MainPanel();
+
+		add(panel);
 		// Čia lango parametrai:
 		setTitle("Skeleton");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -31,6 +33,8 @@ public class Skeleton extends JFrame {
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setResizable(false);
+		
+
 	}
 
 	/**
@@ -41,11 +45,10 @@ public class Skeleton extends JFrame {
 		// Jis sukuria naują Skeleton instance (inicijuotą objektą):
 		new Skeleton();
 		// Kas vyksta toliau -- žr. konstruktorių Skeleton().
-		
-		
+
 		@SuppressWarnings("unused")
 		Logger globalLogger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-		
+
 	}
 
 }

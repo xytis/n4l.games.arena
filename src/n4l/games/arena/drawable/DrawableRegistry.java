@@ -4,36 +4,71 @@
 package n4l.games.arena.drawable;
 
 /**
- * This singleton class is responsible for storing drawable
- * factories and holding the registry of instantiated objects,
- * along with contexts, where they belong. 
+ * This singleton class is responsible for storing drawable factories and
+ * holding the registry of instantiated objects, along with contexts, where they
+ * belong.
  * 
  * @author xytis
- *
+ * 
  */
 public class DrawableRegistry {
+	
+	DrawableContextArray contexts;
+	
+	DrawableFactory factory;
+	
+	/**
+	 * @return the factory
+	 */
+	public DrawableFactory getFactory() {
+		return factory;
+	}
+
+	/**
+	 * @param factory the factory to set
+	 */
+	public void setFactory(DrawableFactory factory) {
+		this.factory = factory;
+	}
+
 	// Private constructor prevents instantiation from other classes
-    private DrawableRegistry() {
-    	
-    }
+	private DrawableRegistry() {
+		contexts = new DrawableContextArray();
+		factory = new DrawableFactory();
+	}
 
-    /**
-    * DrawableRegistryHolder is loaded on the first execution of DrawableRegistry.getInstance() 
-    * or the first access to DrawableRegistryHolder.INSTANCE, not before.
-    */
-    private static class DrawableRegistryHolder { 
-            public static final DrawableRegistry instance = new DrawableRegistry();
-    }
+	/**
+	 * DrawableRegistryHolder is loaded on the first execution of
+	 * DrawableRegistry.getInstance() or the first access to
+	 * DrawableRegistryHolder.INSTANCE, not before.
+	 */
+	private static class DrawableRegistryHolder {
+		public static final DrawableRegistry instance = new DrawableRegistry();
+	}
 
-    public static DrawableRegistry getInstance() {
-            return DrawableRegistryHolder.instance;
-    }
-    
-    /**
+	public static DrawableRegistry getInstance() {
+		return DrawableRegistryHolder.instance;
+	}
+
+	/**
      * 
      */
-    public void registerDrawable(Drawable drawable, DrawableContext context)
-    {
-    	
-    }
+	public void registerDrawable(Drawable drawable, DrawableContext context) {
+		if (!context.contains(drawable)) {
+			context = context.addDrawable(drawable);
+		}
+		if (!contexts.contains(context))
+		{
+			contexts = contexts.addContext(context);
+		}
+	}
+	
+	public void update()
+	{
+		contexts.update();
+	}
+	
+	public void render() {
+		contexts.render();
+	}
 }
