@@ -14,29 +14,27 @@ import java.util.Vector;
 public class DrawableContext extends Drawable {
 
 	private Vector<Drawable> drawables;
-	
+
 	/**
 	 * 
 	 */
 	public DrawableContext() {
 		this.drawables = new Vector<Drawable>();
 	}
-	
+
 	/**
 	 * Toggle hidden
 	 */
 	@Override
-	public void show()
-	{
+	public void show() {
 		super.show();
 		for (Drawable drawable : drawables) {
 			drawable.show();
 		}
 	}
-	
+
 	@Override
-	public void hide()
-	{
+	public void hide() {
 		super.hide();
 		for (Drawable drawable : drawables) {
 			drawable.hide();
@@ -54,13 +52,13 @@ public class DrawableContext extends Drawable {
 	}
 
 	/**
-	 * @param g 
+	 * @param g
 	 * 
 	 */
 	@Override
 	public void render(Graphics2D g, Point r) {
 		super.render(g, r);
-		//Offset
+		// Offset
 		Point nr = r;
 		if (getBounds() != null) {
 			nr.x = nr.x + getBounds().x;
@@ -88,12 +86,11 @@ public class DrawableContext extends Drawable {
 		this.drawables.add(drawable);
 		return this;
 	}
-	
+
 	/**
 	 * 
 	 */
-	public boolean contains(Drawable drawable)
-	{
+	public boolean contains(Drawable drawable) {
 		return this.drawables.contains(drawable);
 	}
 }

@@ -9,7 +9,7 @@ import java.util.logging.Logger;
  * @author xytis
  * 
  */
-public class Skeleton{
+public class Skeleton {
 
 	/**
 	 * @param args

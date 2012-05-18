@@ -5,7 +5,6 @@ package n4l.games.arena;
 
 import n4l.games.arena.utils.AverageCounter;
 
-
 /**
  * @author xytis
  * 
@@ -25,8 +24,7 @@ public class MainThread extends Thread {
 	private final static int MAX_FRAME_SKIPS = 5;
 	// the frame period
 	private final static int FRAME_PERIOD = 1000 / MAX_FPS;
-	
-	
+
 	private MainPanel mainPanel;
 
 	/**
@@ -35,20 +33,18 @@ public class MainThread extends Thread {
 	public MainThread(MainPanel panel) {
 		mainPanel = panel;
 	}
-	
+
 	/**
 	 * 
 	 */
-	public boolean getRunning()
-	{
+	public boolean getRunning() {
 		return this.running;
 	}
-	
+
 	/**
 	 * 
 	 */
-	public MainThread setRunning(boolean running)
-	{
+	public MainThread setRunning(boolean running) {
 		this.running = running;
 		return this;
 	}
@@ -100,12 +96,10 @@ public class MainThread extends Thread {
 				sleepTime += FRAME_PERIOD;
 				framesSkipped++;
 			}
-			
+
 			fps.mark();
 			this.mainPanel.setAvgFps(fps.getAverage());
 		}
 	}
-	
-	
 
 }

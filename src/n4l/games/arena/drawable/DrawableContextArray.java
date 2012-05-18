@@ -21,22 +21,20 @@ public class DrawableContextArray extends DrawableContext {
 	public DrawableContextArray() {
 		this.contexts = new Vector<DrawableContext>();
 	}
-	
+
 	/**
 	 * Toggle hidden
 	 */
 	@Override
-	public void show()
-	{
+	public void show() {
 		super.show();
 		for (DrawableContext context : contexts) {
 			context.show();
 		}
 	}
-	
+
 	@Override
-	public void hide()
-	{
+	public void hide() {
 		super.hide();
 		for (DrawableContext context : contexts) {
 			context.hide();
@@ -54,13 +52,13 @@ public class DrawableContextArray extends DrawableContext {
 	}
 
 	/**
-	 * @param g 
+	 * @param g
 	 * 
 	 */
 	@Override
 	public void render(Graphics2D g, Point r) {
 		super.render(g, r);
-		//Offset
+		// Offset
 		Point nr = r;
 		if (getBounds() != null) {
 			nr.x = nr.x + getBounds().x;
@@ -89,27 +87,24 @@ public class DrawableContextArray extends DrawableContext {
 		this.contexts.firstElement().addDrawable(drawable);
 		return this;
 	}
-	
+
 	/**
 	 * 
 	 */
 	@Override
-	public boolean contains(Drawable drawable)
-	{
+	public boolean contains(Drawable drawable) {
 		for (DrawableContext context : contexts) {
-			if (context.contains(drawable))
-			{
+			if (context.contains(drawable)) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	/**
 	 * 
 	 */
-	public boolean contains(DrawableContext context)
-	{
+	public boolean contains(DrawableContext context) {
 		return contexts.contains(context);
 	}
 }

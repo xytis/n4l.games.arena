@@ -15,7 +15,7 @@ import java.awt.Rectangle;
 public class Drawable implements Refreshable {
 
 	private Rectangle bounds;
-	
+
 	private boolean hidden;
 
 	/**
@@ -26,23 +26,22 @@ public class Drawable implements Refreshable {
 	}
 
 	/**
-	 * @param bounds the bounds to set
+	 * @param bounds
+	 *            the bounds to set
 	 */
 	public Drawable setBounds(Rectangle bounds) {
 		this.bounds = bounds;
 		return this;
 	}
-	
+
 	/**
 	 * Toggle hidden
 	 */
-	public void show()
-	{
+	public void show() {
 		this.hidden = false;
 	}
-	
-	public void hide()
-	{
+
+	public void hide() {
 		this.hidden = true;
 	}
 
@@ -53,7 +52,7 @@ public class Drawable implements Refreshable {
 		this.bounds = null;
 		this.hidden = true;
 	}
-	
+
 	/**
 	 * Constructor
 	 * 
@@ -62,7 +61,7 @@ public class Drawable implements Refreshable {
 	public Drawable(Rectangle bounds) {
 		this.bounds = bounds;
 	}
-	
+
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
@@ -74,19 +73,19 @@ public class Drawable implements Refreshable {
 	public void render(Graphics2D g, Point r) {
 		if (!hidden) {
 			if (bounds != null) {
-				this.draw(r.x + bounds.x, r.y + bounds.y, g);
+				this.draw(g, r.x + bounds.x, r.y + bounds.y);
 			} else {
-				//Do not render.
+				// Do not render.
 				System.out.println(this.toString() + " empty.");
 			}
 		}
-		//Silently ignore hidden items
+		// Silently ignore hidden items
 	}
-	
-	private void draw(int x, int y, Graphics2D g)
-	{
+
+	protected void draw(Graphics2D g, int x, int y) {
 		g.setColor(Color.white);
 		g.drawRect(x, y, bounds.width, bounds.height);
-		g.drawString(this.toString(), x + bounds.width/2, y + bounds.height/2);
+		g.drawString(this.toString(), x + bounds.width / 2, y + bounds.height
+				/ 2);
 	}
 }

@@ -15,11 +15,11 @@ import java.awt.Point;
  * 
  */
 public class DrawableRegistry {
-	
+
 	DrawableContextArray contexts;
-	
+
 	DrawableFactory factory;
-	
+
 	/**
 	 * @return the factory
 	 */
@@ -28,7 +28,8 @@ public class DrawableRegistry {
 	}
 
 	/**
-	 * @param factory the factory to set
+	 * @param factory
+	 *            the factory to set
 	 */
 	public void setFactory(DrawableFactory factory) {
 		this.factory = factory;
@@ -60,18 +61,16 @@ public class DrawableRegistry {
 		if (!context.contains(drawable)) {
 			context = context.addDrawable(drawable);
 		}
-		if (!contexts.contains(context))
-		{
+		if (!contexts.contains(context)) {
 			contexts = contexts.addContext(context);
 		}
 	}
-	
-	public void update()
-	{
+
+	public void update() {
 		contexts.update();
 	}
-	
+
 	public void render(Graphics2D g) {
-		contexts.render(g, new Point(0,0));
+		contexts.render(g, new Point(0, 0));
 	}
 }

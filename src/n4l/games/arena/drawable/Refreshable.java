@@ -11,7 +11,7 @@ import java.awt.Point;
  * 
  */
 public interface Refreshable {
-	
+
 	public void update();
 
 	public void render(Graphics2D g, Point r);
