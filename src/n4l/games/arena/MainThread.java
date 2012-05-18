@@ -3,6 +3,8 @@
  */
 package n4l.games.arena;
 
+import n4l.games.arena.utils.AverageCounter;
+
 
 /**
  * @author xytis
@@ -23,7 +25,8 @@ public class MainThread extends Thread {
 	private final static int MAX_FRAME_SKIPS = 5;
 	// the frame period
 	private final static int FRAME_PERIOD = 1000 / MAX_FPS;
-
+	
+	
 	private MainPanel mainPanel;
 
 	/**
@@ -56,6 +59,8 @@ public class MainThread extends Thread {
 	@Override
 	public void run() {
 		System.out.println("Starting game loop");
+
+		AverageCounter fps = new AverageCounter();
 
 		long beginTime; // the time when the cycle begun
 		long timeDiff; // the time it took for the cycle to execute
@@ -95,8 +100,12 @@ public class MainThread extends Thread {
 				sleepTime += FRAME_PERIOD;
 				framesSkipped++;
 			}
-
+			
+			fps.mark();
+			this.mainPanel.setAvgFps(fps.getAverage());
 		}
 	}
+	
+	
 
 }

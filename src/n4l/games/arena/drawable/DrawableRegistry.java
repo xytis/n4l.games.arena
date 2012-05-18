@@ -3,6 +3,9 @@
  */
 package n4l.games.arena.drawable;
 
+import java.awt.Graphics2D;
+import java.awt.Point;
+
 /**
  * This singleton class is responsible for storing drawable factories and
  * holding the registry of instantiated objects, along with contexts, where they
@@ -68,7 +71,7 @@ public class DrawableRegistry {
 		contexts.update();
 	}
 	
-	public void render() {
-		contexts.render();
+	public void render(Graphics2D g) {
+		contexts.render(g, new Point(0,0));
 	}
 }

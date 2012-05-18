@@ -3,6 +3,8 @@
  */
 package n4l.games.arena.drawable;
 
+import java.awt.Graphics2D;
+import java.awt.Point;
 import java.util.Vector;
 
 /**
@@ -19,6 +21,27 @@ public class DrawableContextArray extends DrawableContext {
 	public DrawableContextArray() {
 		this.contexts = new Vector<DrawableContext>();
 	}
+	
+	/**
+	 * Toggle hidden
+	 */
+	@Override
+	public void show()
+	{
+		super.show();
+		for (DrawableContext context : contexts) {
+			context.show();
+		}
+	}
+	
+	@Override
+	public void hide()
+	{
+		super.hide();
+		for (DrawableContext context : contexts) {
+			context.hide();
+		}
+	}
 
 	/**
 	 * 
@@ -31,12 +54,20 @@ public class DrawableContextArray extends DrawableContext {
 	}
 
 	/**
+	 * @param g 
 	 * 
 	 */
 	@Override
-	public void render() {
+	public void render(Graphics2D g, Point r) {
+		super.render(g, r);
+		//Offset
+		Point nr = r;
+		if (getBounds() != null) {
+			nr.x = nr.x + getBounds().x;
+			nr.y = nr.y + getBounds().y;
+		}
 		for (DrawableContext context : contexts) {
-			context.render();
+			context.render(g, nr);
 		}
 	}
 

@@ -3,21 +3,44 @@
  */
 package n4l.games.arena.drawable;
 
+import java.awt.Graphics2D;
+import java.awt.Point;
 import java.util.Vector;
 
 /**
  * @author xytis
  * 
  */
-public class DrawableContext implements Refreshable {
+public class DrawableContext extends Drawable {
 
 	private Vector<Drawable> drawables;
-
+	
 	/**
 	 * 
 	 */
 	public DrawableContext() {
 		this.drawables = new Vector<Drawable>();
+	}
+	
+	/**
+	 * Toggle hidden
+	 */
+	@Override
+	public void show()
+	{
+		super.show();
+		for (Drawable drawable : drawables) {
+			drawable.show();
+		}
+	}
+	
+	@Override
+	public void hide()
+	{
+		super.hide();
+		for (Drawable drawable : drawables) {
+			drawable.hide();
+		}
 	}
 
 	/**
@@ -31,12 +54,20 @@ public class DrawableContext implements Refreshable {
 	}
 
 	/**
+	 * @param g 
 	 * 
 	 */
 	@Override
-	public void render() {
+	public void render(Graphics2D g, Point r) {
+		super.render(g, r);
+		//Offset
+		Point nr = r;
+		if (getBounds() != null) {
+			nr.x = nr.x + getBounds().x;
+			nr.y = nr.y + getBounds().y;
+		}
 		for (Drawable drawable : drawables) {
-			drawable.render();
+			drawable.render(g, nr);
 		}
 	}
 
