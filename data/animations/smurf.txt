@@ -1,0 +1,16 @@
+sprites/smurf/01.png      5
+sprites/smurf/02.png      5
+sprites/smurf/03.png      5
+sprites/smurf/04.png      5
+sprites/smurf/05.png      5
+sprites/smurf/06.png      5
+sprites/smurf/07.png      5
+sprites/smurf/08.png      5
+sprites/smurf/09.png      5
+sprites/smurf/10.png      5
+sprites/smurf/11.png      5
+sprites/smurf/12.png      5
+sprites/smurf/13.png      5 
+sprites/smurf/14.png      5 
+sprites/smurf/15.png      5 
+sprites/smurf/16.png      5 

@@ -59,7 +59,7 @@ public class DrawableContextArray extends DrawableContext {
 	public void render(Graphics2D g, Point r) {
 		super.render(g, r);
 		// Offset
-		Point nr = r;
+		Point nr = (Point) r.clone();
 		if (getBounds() != null) {
 			nr.x = nr.x + getBounds().x;
 			nr.y = nr.y + getBounds().y;

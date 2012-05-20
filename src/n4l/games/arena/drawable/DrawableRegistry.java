@@ -73,4 +73,12 @@ public class DrawableRegistry {
 	public void render(Graphics2D g) {
 		contexts.render(g, new Point(0, 0));
 	}
+
+	public void show_all() {
+		contexts.show();
+	}
+
+	public void hide_all() {
+		contexts.hide();
+	}
 }

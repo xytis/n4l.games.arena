@@ -18,7 +18,7 @@ public class DrawableFactory {
 
 	public Drawable createDrawable(String name) {
 		try {
-			Class<?> c = Class.forName("n4l.games.arena.drawable." + name);
+			Class<?> c = Class.forName(name);
 			return (Drawable) c.newInstance();
 		} catch (Throwable e) {
 			System.err.println(e);

@@ -8,11 +8,18 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Vector;
 
 import javax.imageio.ImageIO;
+
+import org.javatuples.Pair;
 
 /**
  * A resource manager for sprites in the game. Its often quite important how and
@@ -30,6 +37,7 @@ public class SpriteRegistry {
 	// ---- Singleton begin ----------------------------------------------------
 	private SpriteRegistry() {
 		sprites = new HashMap<String, Sprite>();
+		animations = new HashMap<String, AnimatedSprite>();
 	}
 
 	private static class SpriteRegistryHolder {
@@ -43,6 +51,7 @@ public class SpriteRegistry {
 	// -------------------------------------------------------------------------
 
 	private HashMap<String, Sprite> sprites;
+	private HashMap<String, AnimatedSprite> animations;
 
 	/**
 	 * Retrieve a sprite from the store
@@ -101,6 +110,55 @@ public class SpriteRegistry {
 	}
 
 	/**
+	 * Retrieve an animation from the store
+	 * 
+	 * @param ref
+	 *            The reference to the animation file
+	 * @return An animation instance
+	 */
+	public AnimatedSprite getAnimation(String ref) {
+		if (animations.get(ref) != null) {
+			return (AnimatedSprite) animations.get(ref);
+		}
+
+		Vector<Pair<Sprite, Integer>> array = new Vector<Pair<Sprite, Integer>>();
+
+		try {
+
+			InputStream stream = this.getClass().getClassLoader()
+					.getResourceAsStream(ref);
+
+			if (stream == null) {
+				fail("Can't find ref: " + ref);
+			}
+
+			DataInputStream in = new DataInputStream(stream);
+			BufferedReader fileReader = new BufferedReader(
+					new InputStreamReader(in));
+
+			String strLine;
+			String split[];
+
+			while ((strLine = fileReader.readLine()) != null) {
+				// Print the content on the console
+				System.out.println(strLine);
+				split = strLine.split(" ", 2);
+				Sprite sprite = getSprite(split[0]);
+				Integer time = Integer.parseInt(split[1].trim());
+				array.add(new Pair<Sprite, Integer>(sprite, time));
+			}
+
+		} catch (IOException e) {
+			fail("Failed to load: " + ref);
+		}
+
+		AnimatedSprite animation = new AnimatedSprite(array);
+		animations.put(ref, animation);
+
+		return animation;
+	}
+
+	/**
 	 * Utility method to handle resource loading failure
 	 * 
 	 * @param message
@@ -111,7 +169,7 @@ public class SpriteRegistry {
 		// we dump the message and exit the game
 
 		System.err.println(message);
-		System.exit(0);
+		System.exit(1);
 	}
 
 }

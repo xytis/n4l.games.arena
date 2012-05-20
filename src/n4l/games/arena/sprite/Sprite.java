@@ -7,9 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 
 /**
- * @author xytis http://impactnetworking.net/java1/ch6.htm
- * 
- *         TODO: Make animated version of this.
+ * @author xytis
  * 
  */
 public class Sprite {
