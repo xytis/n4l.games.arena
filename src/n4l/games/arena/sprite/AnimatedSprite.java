@@ -3,7 +3,6 @@
  */
 package n4l.games.arena.sprite;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.Vector;
 
