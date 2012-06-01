@@ -19,8 +19,7 @@ import javax.swing.JPanel;
 import n4l.games.arena.drawable.DrawableContext;
 import n4l.games.arena.drawable.DrawableRegistry;
 import n4l.games.arena.drawable.PanableContextArray;
-import n4l.games.arena.entities.Animation;
-import n4l.games.arena.sprite.SpriteRegistry;
+import n4l.games.arena.map.HexGrid;
 import n4l.games.arena.utils.KeyInputHandler;
 
 /**
@@ -86,11 +85,9 @@ public class MainPanel extends Canvas {
 
 		PanableContextArray p = new PanableContextArray();
 		p.setBounds(new Rectangle(100, 100, 200, 200));
-		DrawableContext c = new DrawableContext();
-		p.addContext(c);
-		Animation a = new Animation(SpriteRegistry.getInstance().getAnimation(
-				"animations/smurf.txt"));
-		DrawableRegistry.getInstance().registerDrawable(a, p);
+		p.addContext(new DrawableContext());
+		HexGrid h = new HexGrid(5, 5);
+		DrawableRegistry.getInstance().registerDrawable(h, p);
 		p.show();
 
 		this.addMouseListener(p);
