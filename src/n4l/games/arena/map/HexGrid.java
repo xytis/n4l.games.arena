@@ -20,7 +20,7 @@ public class HexGrid extends Drawable {
 
 	public HexGrid(int height, int width) {
 		grid = new Hex[height][width];
-		hex = new Hex(10);
+		hex = new Hex(50);
 		this.height = height;
 		this.width = width;
 		this.setBounds(new Rectangle(height * 20, width * 20));
@@ -37,9 +37,13 @@ public class HexGrid extends Drawable {
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				// TODO: fix offsets
-				double offsetX = (Math.sqrt(3) * (1 / 2 + j % 2 + i))
-						* hex.getA();
-				double offsetY = ((1 + 3 * j / 2) * hex.getA());
+				//j = 0, y == 0
+				//j = *, y == j * 1.5a
+				//j%2 = 0, x == 0 + i*width
+				//j%2 = 1, x == 0.5*width + i*width
+				
+				double offsetX = (Math.sqrt(3) * hex.getA()) * (0.5*(j%2) + i);
+				double offsetY = (1.5*j * hex.getA());
 				hex.draw(g, x + (int) offsetX, y + (int) offsetY);
 			}
 		}
