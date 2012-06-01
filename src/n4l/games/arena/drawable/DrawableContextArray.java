@@ -84,6 +84,9 @@ public class DrawableContextArray extends DrawableContext {
 	@Override
 	public DrawableContextArray addDrawable(Drawable drawable) {
 		// Get first context from array, add stuff to that context
+		if (contexts.size() == 0) {
+			throw new RuntimeException("empty Context array");
+		}
 		this.contexts.firstElement().addDrawable(drawable);
 		return this;
 	}

@@ -18,6 +18,59 @@ public class Drawable implements Refreshable {
 
 	private boolean hidden;
 
+	private Drawable parent;
+
+	/**
+	 * @return the parent
+	 */
+	public Drawable getParent() {
+		return parent;
+	}
+
+	/**
+	 * @param parent
+	 *            the parent to set
+	 */
+	public Drawable setParent(Drawable parent) {
+		this.parent = parent;
+		return this;
+	}
+
+	/**
+	 * 
+	 */
+	public int getGlobalX() {
+		if (this.getParent() != null) {
+			if (this.getBounds() != null) {
+				return this.getParent().getGlobalX() + this.getBounds().x;
+			} else {
+				return this.getParent().getGlobalX();
+			}
+		} else {
+			if (this.getBounds() != null) {
+				return this.getBounds().x;
+			} else {
+				return 0;
+			}
+		}
+	}
+
+	public int getGlobalY() {
+		if (this.getParent() != null) {
+			if (this.getBounds() != null) {
+				return this.getParent().getGlobalY() + this.getBounds().y;
+			} else {
+				return this.getParent().getGlobalY();
+			}
+		} else {
+			if (this.getBounds() != null) {
+				return this.getBounds().y;
+			} else {
+				return 0;
+			}
+		}
+	}
+
 	/**
 	 * @return the bounds
 	 */

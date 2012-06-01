@@ -16,11 +16,10 @@ import java.text.DecimalFormat;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import n4l.games.arena.drawable.Drawable;
 import n4l.games.arena.drawable.DrawableContext;
 import n4l.games.arena.drawable.DrawableRegistry;
+import n4l.games.arena.drawable.PanableContextArray;
 import n4l.games.arena.entities.Animation;
-import n4l.games.arena.entities.Image;
 import n4l.games.arena.sprite.SpriteRegistry;
 import n4l.games.arena.utils.KeyInputHandler;
 
@@ -85,30 +84,38 @@ public class MainPanel extends Canvas {
 		createBufferStrategy(2);
 		strategy = getBufferStrategy();
 
-		Drawable d = DrawableRegistry.getInstance().getFactory()
-				.createDrawable(Drawable.class.getName());
-		d.setBounds(new Rectangle(5, 5, 20, 20));
+		PanableContextArray p = new PanableContextArray();
+		p.setBounds(new Rectangle(100, 100, 200, 200));
 		DrawableContext c = new DrawableContext();
-		c.setBounds(new Rectangle(getWidth() / 2, 50, 50, 50));
-
-		DrawableRegistry.getInstance().registerDrawable(d, c);
-		c.show();
-
-		c = new DrawableContext();
-		c.setBounds(new Rectangle(50, 50, 0, 0));
-
-		Image i = new Image(SpriteRegistry.getInstance().getSprite(
-				"sprites/smurf/01.png"));
-		DrawableRegistry.getInstance().registerDrawable(i, c);
-		c.show();
-
-		c = new DrawableContext();
-		c.setBounds(new Rectangle(50, 350, 0, 0));
-
+		p.addContext(c);
 		Animation a = new Animation(SpriteRegistry.getInstance().getAnimation(
 				"animations/smurf.txt"));
-		DrawableRegistry.getInstance().registerDrawable(a, c);
-		c.show();
+		DrawableRegistry.getInstance().registerDrawable(a, p);
+		p.show();
+
+		this.addMouseListener(p);
+		this.addMouseMotionListener(p);
+		/*
+		 * Drawable d = DrawableRegistry.getInstance().getFactory()
+		 * .createDrawable(Drawable.class.getName()); d.setBounds(new
+		 * Rectangle(5, 5, 20, 20)); DrawableContext c = new DrawableContext();
+		 * c.setBounds(new Rectangle(getWidth() / 2, 50, 50, 50));
+		 * 
+		 * DrawableRegistry.getInstance().registerDrawable(d, c); c.show();
+		 * 
+		 * c = new DrawableContext(); c.setBounds(new Rectangle(50, 50, 0, 0));
+		 * 
+		 * Image i = new Image(SpriteRegistry.getInstance().getSprite(
+		 * "sprites/smurf/01.png"));
+		 * DrawableRegistry.getInstance().registerDrawable(i, c); c.show();
+		 * 
+		 * c = new DrawableContext(); c.setBounds(new Rectangle(50, 350, 0, 0));
+		 * 
+		 * Animation a = new
+		 * Animation(SpriteRegistry.getInstance().getAnimation(
+		 * "animations/smurf.txt"));
+		 * DrawableRegistry.getInstance().registerDrawable(a, c); c.show();
+		 */
 
 		thread = new MainThread(this);
 		thread.setRunning(true);

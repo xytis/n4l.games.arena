@@ -84,6 +84,7 @@ public class DrawableContext extends Drawable {
 	 */
 	public DrawableContext addDrawable(Drawable drawable) {
 		this.drawables.add(drawable);
+		drawable.setParent(this);
 		return this;
 	}
 
