@@ -83,14 +83,14 @@ public class MainPanel extends Canvas {
 
 		createBufferStrategy(2);
 		strategy = getBufferStrategy();
-		
-		HexGrid h = new HexGrid(20, 20);
-		//h.accommodate();
 
-		//Static offset
+		HexGrid h = new HexGrid(20, 20);
+		// h.accommodate();
+
+		// Static offset
 		DrawableContext c = new DrawableContext();
 		c.addDrawable(h);
-		//c.accommodate();
+		// c.accommodate();
 
 		PanableContextArray map = new PanableContextArray();
 		map.setBounds(new Rectangle(0, 0, 300, 300));
@@ -98,22 +98,22 @@ public class MainPanel extends Canvas {
 		map.accommodate();
 		this.addMouseListener(map);
 		this.addMouseMotionListener(map);
-		
+
 		DrawableContextArray mapView = new DrawableContextArray();
-		mapView.setBounds(new Rectangle(20, 20, getWidth()-40, getHeight()-140));
+		mapView.setBounds(new Rectangle(20, 20, getWidth() - 40,
+				getHeight() - 140));
 		mapView.addContext(map);
-		//Allow to pan all the map
-		map.offsetLimits(-h.getBounds().width + mapView.getBounds().width - 30, -h.getBounds().height + mapView.getBounds().height - 30, h.getBounds().width - mapView.getBounds().width + 30, h.getBounds().height - mapView.getBounds().height + 30);
-		
+		// Allow to pan all the map
+		map.offsetLimits(-h.getBounds().width + mapView.getBounds().width - 30,
+				-h.getBounds().height + mapView.getBounds().height - 30,
+				h.getBounds().width - mapView.getBounds().width + 30,
+				h.getBounds().height - mapView.getBounds().height + 30);
+
 		DrawableRegistry.getInstance().registerContext(mapView);
-		
-		
-		
-		//DrawableRegistry.getInstance().registerDrawable(h, p);
+
+		// DrawableRegistry.getInstance().registerDrawable(h, p);
 		mapView.show();
 
-		
-		
 		/*
 		 * Drawable d = DrawableRegistry.getInstance().getFactory()
 		 * .createDrawable(Drawable.class.getName()); d.setBounds(new

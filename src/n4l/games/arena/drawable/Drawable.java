@@ -86,7 +86,7 @@ public class Drawable implements Refreshable {
 		this.bounds = bounds;
 		return this;
 	}
-	
+
 	/**
 	 * Change the bounds to accommodate the drawable
 	 */

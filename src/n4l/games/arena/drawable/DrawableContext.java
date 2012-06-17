@@ -7,8 +7,6 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.Shape;
-import java.awt.Stroke;
 import java.util.Vector;
 
 /**
@@ -44,10 +42,10 @@ public class DrawableContext extends Drawable {
 			drawable.hide();
 		}
 	}
-	
+
 	@Override
 	public void accommodate() {
-		//TODO: finish this shit.
+		// TODO: finish this shit.
 		int width = 0;
 		int height = 0;
 		for (Drawable drawable : drawables) {
@@ -91,12 +89,12 @@ public class DrawableContext extends Drawable {
 			nr.y = nr.y + getBounds().y;
 			g.clipRect(nr.x, nr.y, getBounds().width, getBounds().height);
 		}
-		
+
 		for (Drawable drawable : drawables) {
 			drawable.render(g, nr);
 		}
 	}
-	
+
 	@Override
 	protected void draw(Graphics2D g, int x, int y) {
 		g.setColor(Color.green);

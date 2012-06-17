@@ -41,7 +41,7 @@ public class DrawableContextArray extends DrawableContext {
 			context.hide();
 		}
 	}
-	
+
 	@Override
 	public void accommodate() {
 		int width = 0;

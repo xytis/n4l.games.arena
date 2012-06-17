@@ -65,7 +65,7 @@ public class DrawableRegistry {
 			contexts = contexts.addContext(context);
 		}
 	}
-	
+
 	/**
      * 
      */
