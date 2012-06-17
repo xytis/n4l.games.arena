@@ -86,6 +86,16 @@ public class Drawable implements Refreshable {
 		this.bounds = bounds;
 		return this;
 	}
+	
+	/**
+	 * Change the bounds to accommodate the drawable
+	 */
+	public void accommodate() {
+		if (this.getBounds() == null) {
+			this.setBounds(new Rectangle());
+		}
+		System.err.println("Base drawable has nothing to accommodate.");
+	}
 
 	/**
 	 * Toggle hidden

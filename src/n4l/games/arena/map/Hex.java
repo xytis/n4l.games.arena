@@ -54,11 +54,12 @@ public class Hex {
 		}
 	}
 
-	public void draw(Graphics2D g, int x, int y) {
+	public void draw(Graphics2D g, int x, int y, int type) {
 		// Draw hex around a center.
 		this.getPolygon().translate(x, y);
 		g.setColor(Color.white);
 		g.drawPolygon(this.getPolygon());
+		g.drawString("T" + type, x+this.getPolygon().getBounds().width/2, y+this.getPolygon().getBounds().height/2);
 		this.getPolygon().translate(-x, -y);
 
 	}

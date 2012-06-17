@@ -65,6 +65,15 @@ public class DrawableRegistry {
 			contexts = contexts.addContext(context);
 		}
 	}
+	
+	/**
+     * 
+     */
+	public void registerContext(DrawableContext context) {
+		if (!contexts.contains(context)) {
+			contexts = contexts.addContext(context);
+		}
+	}
 
 	public void update() {
 		contexts.update();

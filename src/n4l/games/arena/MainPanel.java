@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import n4l.games.arena.drawable.DrawableContext;
+import n4l.games.arena.drawable.DrawableContextArray;
 import n4l.games.arena.drawable.DrawableRegistry;
 import n4l.games.arena.drawable.PanableContextArray;
 import n4l.games.arena.map.HexGrid;
@@ -82,16 +83,37 @@ public class MainPanel extends Canvas {
 
 		createBufferStrategy(2);
 		strategy = getBufferStrategy();
+		
+		HexGrid h = new HexGrid(20, 20);
+		//h.accommodate();
 
-		PanableContextArray p = new PanableContextArray();
-		p.setBounds(new Rectangle(100, 100, 200, 200));
-		p.addContext(new DrawableContext());
-		HexGrid h = new HexGrid(5, 5);
-		DrawableRegistry.getInstance().registerDrawable(h, p);
-		p.show();
+		//Static offset
+		DrawableContext c = new DrawableContext();
+		c.addDrawable(h);
+		//c.accommodate();
 
-		this.addMouseListener(p);
-		this.addMouseMotionListener(p);
+		PanableContextArray map = new PanableContextArray();
+		map.setBounds(new Rectangle(0, 0, 300, 300));
+		map.addContext(c);
+		map.accommodate();
+		this.addMouseListener(map);
+		this.addMouseMotionListener(map);
+		
+		DrawableContextArray mapView = new DrawableContextArray();
+		mapView.setBounds(new Rectangle(20, 20, getWidth()-40, getHeight()-140));
+		mapView.addContext(map);
+		//Allow to pan all the map
+		map.offsetLimits(-h.getBounds().width + mapView.getBounds().width - 30, -h.getBounds().height + mapView.getBounds().height - 30, h.getBounds().width - mapView.getBounds().width + 30, h.getBounds().height - mapView.getBounds().height + 30);
+		
+		DrawableRegistry.getInstance().registerContext(mapView);
+		
+		
+		
+		//DrawableRegistry.getInstance().registerDrawable(h, p);
+		mapView.show();
+
+		
+		
 		/*
 		 * Drawable d = DrawableRegistry.getInstance().getFactory()
 		 * .createDrawable(Drawable.class.getName()); d.setBounds(new
@@ -136,8 +158,8 @@ public class MainPanel extends Canvas {
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(Color.white);
 		g.drawString(AvgFps,
-				(getWidth() - g.getFontMetrics().stringWidth(AvgFps)) / 2,
-				getHeight() / 2);
+				(getWidth() - g.getFontMetrics().stringWidth(AvgFps)),
+				(getHeight()));
 		DrawableRegistry.getInstance().render(g);
 
 		g.dispose();

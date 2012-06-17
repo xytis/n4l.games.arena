@@ -5,6 +5,7 @@ package n4l.games.arena.drawable;
 
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.Vector;
 
 /**
@@ -38,6 +39,27 @@ public class DrawableContextArray extends DrawableContext {
 		super.hide();
 		for (DrawableContext context : contexts) {
 			context.hide();
+		}
+	}
+	
+	@Override
+	public void accommodate() {
+		int width = 0;
+		int height = 0;
+		for (Drawable context : contexts) {
+			context.accommodate();
+			if (context.getBounds().x + context.getBounds().width > width) {
+				width = context.getBounds().x + context.getBounds().width;
+			}
+			if (context.getBounds().y + context.getBounds().height > height) {
+				height = context.getBounds().y + context.getBounds().height;
+			}
+		}
+		if (this.getBounds() != null) {
+			this.getBounds().width = width;
+			this.getBounds().height = height;
+		} else {
+			this.setBounds(new Rectangle(0, 0, width, height));
 		}
 	}
 
@@ -75,6 +97,7 @@ public class DrawableContextArray extends DrawableContext {
 	@Override
 	public DrawableContextArray addContext(DrawableContext context) {
 		contexts.add(context);
+		context.setParent(this);
 		return this;
 	}
 

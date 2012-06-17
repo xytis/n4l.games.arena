@@ -3,8 +3,12 @@
  */
 package n4l.games.arena.drawable;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.Stroke;
 import java.util.Vector;
 
 /**
@@ -40,6 +44,28 @@ public class DrawableContext extends Drawable {
 			drawable.hide();
 		}
 	}
+	
+	@Override
+	public void accommodate() {
+		//TODO: finish this shit.
+		int width = 0;
+		int height = 0;
+		for (Drawable drawable : drawables) {
+			drawable.accommodate();
+			if (drawable.getBounds().x + drawable.getBounds().width > width) {
+				width = drawable.getBounds().x + drawable.getBounds().width;
+			}
+			if (drawable.getBounds().y + drawable.getBounds().height > height) {
+				height = drawable.getBounds().y + drawable.getBounds().height;
+			}
+		}
+		if (this.getBounds() != null) {
+			this.getBounds().width = width;
+			this.getBounds().height = height;
+		} else {
+			this.setBounds(new Rectangle(0, 0, width, height));
+		}
+	}
 
 	/**
 	 * 
@@ -63,10 +89,18 @@ public class DrawableContext extends Drawable {
 		if (getBounds() != null) {
 			nr.x = nr.x + getBounds().x;
 			nr.y = nr.y + getBounds().y;
+			g.clipRect(nr.x, nr.y, getBounds().width, getBounds().height);
 		}
+		
 		for (Drawable drawable : drawables) {
 			drawable.render(g, nr);
 		}
+	}
+	
+	@Override
+	protected void draw(Graphics2D g, int x, int y) {
+		g.setColor(Color.green);
+		g.drawRect(x, y, getBounds().width, getBounds().height);
 	}
 
 	/**
