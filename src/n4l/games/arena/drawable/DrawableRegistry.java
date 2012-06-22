@@ -16,7 +16,7 @@ import java.awt.Point;
  */
 public class DrawableRegistry {
 
-	DrawableContextArray contexts;
+	DrawableContext contexts;
 
 	DrawableFactory factory;
 
@@ -37,7 +37,7 @@ public class DrawableRegistry {
 
 	// Private constructor prevents instantiation from other classes
 	private DrawableRegistry() {
-		contexts = new DrawableContextArray();
+		contexts = new DrawableContext();
 		factory = new DrawableFactory();
 	}
 
@@ -62,7 +62,7 @@ public class DrawableRegistry {
 			context = context.addDrawable(drawable);
 		}
 		if (!contexts.contains(context)) {
-			contexts = contexts.addContext(context);
+			contexts = contexts.addDrawable(context);
 		}
 	}
 
@@ -71,8 +71,30 @@ public class DrawableRegistry {
      */
 	public void registerContext(DrawableContext context) {
 		if (!contexts.contains(context)) {
-			contexts = contexts.addContext(context);
+			contexts = contexts.addDrawable(context);
 		}
+	}
+	
+	/**
+	 * 
+	 */
+	public void swap(Drawable one, Drawable two) {
+		two.setParent(one.getParent());
+		if (contexts.contains(one)) {
+			                                              
+		}
+	}
+	
+	/**
+	 * 
+	 */
+	public boolean containsDrawable(Drawable drawable) {
+		for (Drawable context : contexts) {
+			if (context.contains(drawable)) {
+					return true;
+			}
+		}		
+		return false;
 	}
 
 	public void update() {

@@ -12,6 +12,7 @@ import java.util.Vector;
  * @author xytis
  * 
  */
+@Deprecated
 public class DrawableContextArray extends DrawableContext {
 
 	private Vector<DrawableContext> contexts;
@@ -89,16 +90,6 @@ public class DrawableContextArray extends DrawableContext {
 		for (DrawableContext context : contexts) {
 			context.render(g, nr);
 		}
-	}
-
-	/**
-	 * 
-	 */
-	@Override
-	public DrawableContextArray addContext(DrawableContext context) {
-		contexts.add(context);
-		context.setParent(this);
-		return this;
 	}
 
 	/**

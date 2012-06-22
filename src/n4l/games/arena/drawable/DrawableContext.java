@@ -7,13 +7,14 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.Iterator;
 import java.util.Vector;
 
 /**
  * @author xytis
  * 
  */
-public class DrawableContext extends Drawable {
+public class DrawableContext extends BaseDrawable implements Iterable<Drawable> {
 
 	private Vector<Drawable> drawables;
 
@@ -99,21 +100,14 @@ public class DrawableContext extends Drawable {
 	protected void draw(Graphics2D g, int x, int y) {
 		g.setColor(Color.green);
 		g.drawRect(x, y, getBounds().width, getBounds().height);
+		g.drawString(this.toString(), x+2, y+10);
 	}
+
 
 	/**
 	 * 
 	 */
-	public DrawableContextArray addContext(DrawableContext context) {
-		DrawableContextArray array = new DrawableContextArray();
-		array.addContext(this);
-		array.addContext(context);
-		return array;
-	}
-
-	/**
-	 * 
-	 */
+	@Override
 	public DrawableContext addDrawable(Drawable drawable) {
 		this.drawables.add(drawable);
 		drawable.setParent(this);
@@ -123,7 +117,13 @@ public class DrawableContext extends Drawable {
 	/**
 	 * 
 	 */
+	@Override
 	public boolean contains(Drawable drawable) {
 		return this.drawables.contains(drawable);
+	}
+
+	@Override
+	public Iterator<Drawable> iterator() {
+		return drawables.iterator();
 	}
 }

@@ -6,14 +6,14 @@ package n4l.games.arena.entities;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
-import n4l.games.arena.drawable.Drawable;
+import n4l.games.arena.drawable.BaseDrawable;
 import n4l.games.arena.sprite.AnimatedSprite;
 
 /**
  * @author xytis
  * 
  */
-public class Animation extends Drawable {
+public class Animation extends BaseDrawable {
 
 	private AnimatedSprite animation;
 

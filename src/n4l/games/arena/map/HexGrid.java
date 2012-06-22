@@ -6,13 +6,13 @@ package n4l.games.arena.map;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
-import n4l.games.arena.drawable.Drawable;
+import n4l.games.arena.drawable.BaseDrawable;
 
 /**
  * @author xytis
  * 
  */
-public class HexGrid extends Drawable {
+public class HexGrid extends BaseDrawable {
 	private Integer[][] grid;
 	private Hex hex;
 	private int height;

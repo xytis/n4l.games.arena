@@ -3,44 +3,36 @@
  */
 package n4l.games.arena.drawable;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
 
 /**
  * @author xytis
  * 
  */
-public class PanableContextArray extends DrawableContextArray implements
-		MouseListener, MouseMotionListener {
+public class PanableDrawable extends MouseAwareDrawable {
+
+	public PanableDrawable() {
+		lastMouseX = new Integer(0);
+		lastMouseY = new Integer(0);
+		offsetX = new Double(0);
+		offsetY = new Double(0);
+		scale = 1;
+		lifted = false;
+	}
+
 
 	Integer lastMouseX, lastMouseY;
-	String state;
+	Double offsetX, offsetY;
+
 	private Boolean lifted;
 
 	private Rectangle limits;
-
-	/**
-	 * 
-	 */
-	public PanableContextArray() {
-		lastMouseX = new Integer(0);
-		lastMouseY = new Integer(0);
-		state = new String();
-		lifted = false;
-	}
-
-	public PanableContextArray(Rectangle limits) {
-		lastMouseX = new Integer(0);
-		lastMouseY = new Integer(0);
-		state = new String();
-		lifted = false;
-
-		this.setLimits(limits);
-	}
+	
+	private double scale;
 
 	public Rectangle getLimits() {
 		return limits;
@@ -64,31 +56,9 @@ public class PanableContextArray extends DrawableContextArray implements
 	}
 
 	@Override
-	protected void draw(Graphics2D g, int x, int y) {
-		g.setColor(Color.pink);
-		g.drawRect(x - 1, y - 1, getBounds().width + 2, getBounds().height + 2);
-		g.drawOval(x - 1, y - 1, 3, 3);
-		g.drawString("(" + getBounds().x + ":" + getBounds().y + ")", x, y);
-		g.drawOval(x + getBounds().width - 1, y + getBounds().height - 1, 3, 3);
-		g.drawString("(" + (getBounds().x + getBounds().width) + ":"
-				+ (getBounds().y + getBounds().height) + ")", x
-				+ getBounds().width, y + getBounds().height);
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// NOP
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// NOP
-	}
-
-	@Override
 	public void mousePressed(MouseEvent e) {
+		super.mousePressed(e);
 		if (this.eventCheck(e)) {
-			state = "Pressed";
 			lifted = true;
 			lastMouseX = e.getX();
 			lastMouseY = e.getY();
@@ -97,8 +67,8 @@ public class PanableContextArray extends DrawableContextArray implements
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		super.mouseReleased(e);
 		if (this.eventCheck(e)) {
-			state = "Released";
 			lifted = false;
 			lastMouseX = e.getX();
 			lastMouseY = e.getY();
@@ -108,8 +78,8 @@ public class PanableContextArray extends DrawableContextArray implements
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		super.mouseClicked(e);
 		if (this.eventCheck(e)) {
-			state = "Clicked";
 			lastMouseX = e.getX();
 			lastMouseY = e.getY();
 		}
@@ -117,9 +87,11 @@ public class PanableContextArray extends DrawableContextArray implements
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
+		super.mouseDragged(e);
 		if (this.eventCheck(e)) {
-			state = "Dragged";
 			if (lifted) {
+				//TODO: go to Graphics.translate.
+				
 				this.getBounds().x += e.getX() - lastMouseX;
 				this.getBounds().y += e.getY() - lastMouseY;
 				if (limits != null) {
@@ -143,6 +115,34 @@ public class PanableContextArray extends DrawableContextArray implements
 								- this.getBounds().height;
 					}
 				}
+				
+				/*
+				offsetX += e.getX() - lastMouseX;
+				offsetY += e.getY() - lastMouseY;
+				if (limits != null) {
+					// Apply drag limits
+					if (offsetX < this.getLimits().x + this.getLimits().width * (1.0 - scale)/2) {
+						offsetX = this.getLimits().x + this.getLimits().width * (1.0 - scale)/2;
+					}
+					if (offsetY < this.getLimits().y + this.getLimits().height * (1.0 - scale)/2) {
+						offsetY = this.getLimits().y + this.getLimits().height * (1.0 - scale)/2;
+					}
+					if (offsetX + this.getBounds().width * scale > this
+							.getLimits().x + this.getLimits().width  - this.getLimits().width * (1.0 - scale)/2) {
+						offsetX = this.getLimits().x
+								+ this.getLimits().width
+								- this.getBounds().width * scale
+								- this.getLimits().width * (1.0 - scale)/2;
+					}
+					if (offsetY + this.getBounds().height * scale > this
+							.getLimits().y + this.getLimits().height - this.getLimits().height * (1.0 - scale)/2) {
+						offsetY = this.getLimits().y
+								+ this.getLimits().height
+								- this.getBounds().height * scale
+								- this.getLimits().height * (1.0 - scale)/2;
+					}
+				}
+				*/
 			}
 			lastMouseX = e.getX();
 			lastMouseY = e.getY();
@@ -152,58 +152,43 @@ public class PanableContextArray extends DrawableContextArray implements
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
+		super.mouseMoved(e);
 		if (this.eventCheck(e)) {
-			state = "Moved";
 			lastMouseX = e.getX();
 			lastMouseY = e.getY();
 		}
 	}
-
-	private Boolean eventCheck(MouseEvent e) {
-		if (this.getBounds() != null) {
-			Rectangle box = new Rectangle(this.getGlobalX(), this.getGlobalY(),
-					this.getBounds().width, this.getBounds().height);
-			if (this.getParent() != null) {
-				if (this.getParent().getBounds() != null) {
-					// Object is bounded (and clipped) by parent
-					Rectangle parentBounds = this.getParent().getBounds();
-					// Top left corner
-					if (parentBounds.x > box.x) {
-						box.x = parentBounds.x;
-					}
-					if (parentBounds.y > box.y) {
-						box.y = parentBounds.y;
-					}
-					// Bottom right corner
-					if (parentBounds.x + parentBounds.width < box.x + box.width) {
-						box.width = parentBounds.x + parentBounds.width - box.x;
-					}
-					if (parentBounds.y + parentBounds.height < box.y
-							+ box.height) {
-						box.height = parentBounds.y + parentBounds.height
-								- box.y;
-					}
-				}
+	
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent e) {
+		System.out.println("Mouse wheel moved " + scale);
+		int c = e.getWheelRotation();
+		if (c > 0) {
+			scale += 0.1;
+		} else if (scale > 0.2) {
+			if (c < 0) {
+				scale -= 0.1;
 			}
-			if (box.contains(e.getPoint())) {
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
 		}
 
 	}
+	
 
 	@Override
 	public String toString() {
 		return super.toString() + " Coords: (" + getGlobalX() + ":"
 				+ getGlobalY() + ") Local: (" + this.getBounds().x + ":"
 				+ this.getBounds().y + ")";
-		// return super.toString() + " Limits: (" + getLimits().x + ":" +
-		// getLimits().y + ":" + getLimits().width + ":" + getLimits().height +
-		// ")";
 	}
+	
+	@Override
+	public void render(Graphics2D g, Point r) {
+		//g.translate(offsetX, offsetY);
+		//g.scale(scale, scale);
+		super.render(g, r);
+		//g.scale(1, 1);
+		//g.translate(-offsetX, -offsetY);
+	}
+
 
 }

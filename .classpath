@@ -4,5 +4,12 @@
 	<classpathentry kind="src" path="data"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/javatuples-1.2/lib/javatuples-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/slick/ibxm.jar"/>
+	<classpathentry kind="lib" path="lib/slick/slick.jar"/>
+	<classpathentry kind="lib" path="lib/slick/lwjgl.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Arena/lib/lwjgl-2.8.4/native/linux"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -6,14 +6,14 @@ package n4l.games.arena.entities;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
-import n4l.games.arena.drawable.Drawable;
+import n4l.games.arena.drawable.BaseDrawable;
 import n4l.games.arena.sprite.Sprite;
 
 /**
  * @author xytis
  * 
  */
-public class Image extends Drawable {
+public class Image extends BaseDrawable {
 
 	private Sprite sprite;
 

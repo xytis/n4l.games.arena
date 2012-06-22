@@ -7,7 +7,6 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
@@ -16,11 +15,8 @@ import java.text.DecimalFormat;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import n4l.games.arena.drawable.DrawableContext;
-import n4l.games.arena.drawable.DrawableContextArray;
 import n4l.games.arena.drawable.DrawableRegistry;
-import n4l.games.arena.drawable.PanableContextArray;
-import n4l.games.arena.map.HexGrid;
+import n4l.games.arena.map.Map;
 import n4l.games.arena.utils.KeyInputHandler;
 
 /**
@@ -84,35 +80,11 @@ public class MainPanel extends Canvas {
 		createBufferStrategy(2);
 		strategy = getBufferStrategy();
 
-		HexGrid h = new HexGrid(20, 20);
-		// h.accommodate();
+		Map map = new Map(this);
 
-		// Static offset
-		DrawableContext c = new DrawableContext();
-		c.addDrawable(h);
-		// c.accommodate();
+		DrawableRegistry.getInstance().registerContext(map);
 
-		PanableContextArray map = new PanableContextArray();
-		map.setBounds(new Rectangle(0, 0, 300, 300));
-		map.addContext(c);
-		map.accommodate();
-		this.addMouseListener(map);
-		this.addMouseMotionListener(map);
-
-		DrawableContextArray mapView = new DrawableContextArray();
-		mapView.setBounds(new Rectangle(20, 20, getWidth() - 40,
-				getHeight() - 140));
-		mapView.addContext(map);
-		// Allow to pan all the map
-		map.offsetLimits(-h.getBounds().width + mapView.getBounds().width - 30,
-				-h.getBounds().height + mapView.getBounds().height - 30,
-				h.getBounds().width - mapView.getBounds().width + 30,
-				h.getBounds().height - mapView.getBounds().height + 30);
-
-		DrawableRegistry.getInstance().registerContext(mapView);
-
-		// DrawableRegistry.getInstance().registerDrawable(h, p);
-		mapView.show();
+		map.show();
 
 		/*
 		 * Drawable d = DrawableRegistry.getInstance().getFactory()
